@@ -1,92 +1,83 @@
-<html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>	
-</head>
-<body>
-<div class="container" style="margin-top:100px;">
-<div class="row col-md-12">
-<ul class="nav nav-pills">
-<li><button class="btn btn-info"><a data-toggle="tab" href="#form">Form</a></button></li>
-<li><button class="btn btn-info"><a data-toggle="tab" href="#list">List</a></button></li>
-</ul>
-</div>
-</div>
-<div class="container">
-<div class="tab-content">
-<div class="tab-pane fade" id="form">
-<div class="container">
-<form action="/submit" method="post">
-<div class="row">
-<h3>DETAILS</h3>
-<hr style="border-color: red;">
-<div class="form-group col-md-4" style="margin-left: 90px; margin-top: 21px;">
-<label class="control-label col-md-5"><b>Firstname:</b></label>
-<div class="input-group">
-<span class="input-group-addon" style="border-radius: 19px;"><i class="fa fa-user" arial-hidden="true"></i></span>
-<input type="text" name="name" placeholder="enter your name" class="form-control" style="border-radius: 20px; font-size:15px;">
-</div>
-</div>
-</div>
-<div class="row">
-<div class="form-group col-md-4" style="margin-left: 90px; margin-top: 21px;">
-<label class="control-label col-md-5"><b>Lastname:</b></label>
-<div class="input-group">
-<span class="input-group-addon" style="border-radius: 19px;"><i class="fa fa-user" arial-hidden="true"></i></span> 
-<input type="text" name="name2" placeholder="enter your number" class="form-control" style="border-radius:20px; font-size:15px;">
-</div>
-</div>
-</div>
-<div class="row">
-<div class="form-group col-md-4" style="margin-left: 90px; margin-top: 21px;">
-<label class="control-label col-md-5"><b>Number:</b></label>
-<div class="input-group">
-<span class="input-group-addon" style="border-radius: 19px;"><i class="fa fa-phone" arial-hidden="true"></i></span> 
-<input type="text" name="number" placeholder="enter your number" class="form-control" style="border-radius:20px; font-size:15px;">
-</div>
-</div>
-</div>
-<div class="row">
-<div class="form-group col-md-4" style="margin-left: 90px; margin-top: 21px;">
-<label class="control-label col-md-5"><b>Email:</b></label>
-<div class="input-group">
-<span class="input-group-addon" style="border-radius: 19px;"><i class="fa fa-envelope-o" arial-hidden="true"></i></span> 
-<input type="text" name="email" placeholder="enter your email" class="form-control" style="border-radius:20px; font-size:15px;">
-</div>
-</div>
-</div>
-<input type="submit" name="form" value="submit" class="btn btn-info"></input>
-</form>
-</div>
-</div>
-<div class="tab-pane fade" id="list">
-
-<script src="javascripts/list.js"></script>
-<table id="example" class="table-bordered table-striped table-hover">
-<thead>
-<tr>
-<th>name</th>
-<th>number</th>
-<th>email</th>
-</tr>
-</thead>
-</table> 
-</div>
-</div>
-</div>
-</body>
-</html>
+html
+  head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css')
+    link(rel='stylesheet', type='text/css', href='https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css')
+    script(type='text/javascript', src='https://code.jquery.com/jquery-3.3.1.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js')
+    script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js')
+  body
+    .container(style='margin-top:100px;')
+      .row.col-md-12
+        ul.nav.nav-pills
+          li
+            button.btn.btn-info
+              a(data-toggle='tab', href='#form') Form
+          li
+            button.btn.btn-info
+              a(data-toggle='tab', href='#list') List
+    .container
+      .tab-content
+        #form.tab-pane.fade
+          .container
+            form(action='/submit', method='post')
+              .row
+                h3 DETAILS
+                hr(style='border-color: red;')
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                    b Firstname:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-user(arial-hidden='true')
+                    input.form-control(type='text', name='name', placeholder='enter your name', style='border-radius: 20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                    b Lastname:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-user(arial-hidden='true')
+                    input.form-control(type='text', name='name2', placeholder='enter your number', style='border-radius:20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                    b Number:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-phone(arial-hidden='true')
+                    input.form-control(type='text', name='number', placeholder='enter your number', style='border-radius:20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                    b Email:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-envelope-o(arial-hidden='true')
+                    input.form-control(type='text', name='email', placeholder='enter your email', style='border-radius:20px; font-size:15px;')
+              input.btn.btn-info(type='submit', name='form', value='submit')
+        #list.tab-pane.fade
+          script(src='javascripts/list.js')
+          table#example.table-bordered.table-striped.table-hover
+            thead
+              tr
+                th firstname
+                th lastname
+                th number
+                th email
+            tbody
+              each member in data
+                tr
+                  td #{member.firstname}
+                  td #{member.lastname}
+                  td #{member.number}
+                  td #{member.email}

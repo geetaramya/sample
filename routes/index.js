@@ -4,7 +4,7 @@ var monk=require('monk');
 var db=monk('localhost:27017/aditya');
 var collection=db.get('signup');
 console.log('connected'); 
-var collection=db.get('form');     
+var collection1=db.get('submit');     
 
 /* GET home page. */
 router.get('/',function(req,res)
@@ -14,20 +14,21 @@ router.get('/',function(req,res)
 
 router.get('/home',function(req,res)
 {
-	collection.find({},function(err,docs){
+	collection1.find({},function(err,docs){
 		console.log(docs);
 		res.locals.data=docs;
 
-	});
+	
 	res.render('home');
+	});
 });
 
 router.post('/submit',function(req,res){
 	var firstname=req.body.name;
-	console.log(name);
+	console.log(firstname); 
 
 	var lastname=req.body.name2;
-	console.log(name);
+	console.log(lastname);
 
 	var number=req.body.number;
 	console.log(number);
@@ -35,8 +36,9 @@ router.post('/submit',function(req,res){
 	var email=req.body.email;
 	console.log(email);
 
-	collection.insert({"firstname":name,"lastname":name2,"phonenumber":number,"email":email,});
-	 res.redirect("/home");
+	collection1.insert({"firstname":req.body.name,"lastname":req.body.name2,"number":req.body.number,"email":req.body.email,});
+
+res.redirect("/home");
 	 });
 
 
