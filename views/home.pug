@@ -74,6 +74,7 @@ html
                 th lastname
                 th number
                 th email
+                th action
             tbody
               each member in data
                 tr
@@ -81,3 +82,6 @@ html
                   td #{member.lastname}
                   td #{member.number}
                   td #{member.email}
+                  td
+                    button.btn.btn-info edit
+                    button(style="margin-left:8px").btn.btn-danger remove
