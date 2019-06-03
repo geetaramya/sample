@@ -15,6 +15,7 @@ html
     script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js')
     script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js')
     script(type='text/javascript', src='https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js')
+    link(rel='stylesheet',href='stylesheets/style.css')
   body
     .container(style='margin-top:100px;')
       .row.col-md-12
@@ -47,7 +48,7 @@ html
                   .input-group
                     span.input-group-addon(style='border-radius: 19px;')
                       i.fa.fa-user(arial-hidden='true')
-                    input.form-control(type='text', name='name2', placeholder='enter your number', style='border-radius:20px; font-size:15px;')
+                    input.form-control(type='text', name='name2', placeholder='enter your name', style='border-radius:20px; font-size:15px;')
               .row
                 .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
                   label.control-label.col-md-5
@@ -64,9 +65,10 @@ html
                     span.input-group-addon(style='border-radius: 19px;')
                       i.fa.fa-envelope-o(arial-hidden='true')
                     input.form-control(type='text', name='email', placeholder='enter your email', style='border-radius:20px; font-size:15px;')
-              input.btn.btn-info(type='submit', name='form', value='submit')
+              input.btn.btn-info(type='submit', name='submit', value='submit')
         #list.tab-pane.fade
           script(src='javascripts/list.js')
+          script(src='javascripts/edit.js')
           table#example.table-bordered.table-striped.table-hover
             thead
               tr
@@ -83,5 +85,43 @@ html
                   td #{member.number}
                   td #{member.email}
                   td
-                    button.btn.btn-info edit
-                    button(style="margin-left:8px").btn.btn-danger remove
+                    button(value=member._id).btn.btn-info.edit edit
+                    button(value=member._id style="margin-left:8px").btn.btn-danger.delete remove
+          .dontshow
+            form(action='/update', method='post')
+              .row
+                h3 DETAILS
+                hr(style='border-color: red;')
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  input(type='text',name='id')#id.hide
+                  label.control-label.col-md-5
+                  b Firstname:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-user(arial-hidden='true')
+                    input#firstname.form-control(type='text', name='firstname', placeholder='enter your name', style='border-radius: 20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                  b Lastname:
+                    .input-group
+                      span.input-group-addon(style='border-radius: 19px;')
+                        i.fa.fa-user(arial-hidden='true')
+                      input#lastname.form-control(type='text', name='lastname', placeholder='enter your name', style='border-radius:20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                  b Number:
+                    .input-group
+                      span.input-group-addon(style='border-radius: 19px;')
+                        i.fa.fa-phone(arial-hidden='true')
+                      input#number.form-control(type='text', name='number', placeholder='enter your number', style='border-radius:20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-5
+                  b Email:
+                    .input-group
+                      span.input-group-addon(style='border-radius: 19px;')
+                        i.fa.fa-envelope-o(arial-hidden='true')
+                      input#email.form-control(type='text', name='email', placeholder='enter your email', style='border-radius:20px; font-size:15px;')
+              input.btn.btn-info(type='submit', name='update', value='update')
