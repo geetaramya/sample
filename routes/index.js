@@ -1,4 +1,4 @@
-var express = require('express');
+ var express = require('express');
 var router = express.Router();
 var monk=require('monk');
 var db=monk('localhost:27017/aditya');
@@ -7,15 +7,48 @@ console.log('connected');
 var collection1=db.get('submit'); 
 var moment=require('moment'); 
 var nodemailer=require('nodemailer');  
+var randomstring=require('randomstring');
+var multer=require('multer');
+//var sessions=require('client-sessions');
+//var upload = multer({ dest: 'uploads/' });
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+});
+var upload = multer({ storage: storage })
 
 /* GET home page. */
 router.get('/',function(req,res)
 { 
-	res.render('index');
+	if(req.session&&req.session.user){
+		res.locals.user==req.session.user;
+		 res.redirect('/home');
+	}
+	else{
+		req.session.reset();
+		res.render('index');
+	}
+  
+});
+
+router.get('/forgotpassword',function(req,res)
+{ 
+	res.render('forgotpassword');
+});
+router.get('/logout',function(req,res){
+	req.session.reset();
+	res.redirect('/')
 });
 
 router.get('/home',function(req,res)
 {
+	if(req.session&&req.session.user){
+		res.locals.user=req.session.user;
 	collection1.find({},function(err,docs){
 		console.log(docs);
 		res.locals.data=docs;
@@ -23,7 +56,43 @@ router.get('/home',function(req,res)
 	
 	res.render('home');
 	});
+}
+else{
+	res.redirect('/')
+}
 });
+
+router.post('/forgot',function(req,res){
+	var email=req.body.email;
+	console.log(email);
+	var otp=randomstring.generate(5);
+    var msg="<html><head></head><body><b>"+otp+"</b></body></html>";
+    collection1.update({"email":email},{$set:{"password":otp}});
+
+	 var transporter = nodemailer.createTransport({
+	  service: 'gmail.com',
+	  auth: {
+	    user: '16a91a1246@gmail.com',
+	    pass: 'ramya1246'
+	  }
+	});
+
+	var mailOptions = {
+	  from: '16a91a1246@gmail.com',
+	  to: req.body.email,
+	  subject: 'password changed',
+	  html:msg,
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+	  if (error) {
+	    console.log("mail not send");
+	  } else {
+	    console.log('Email sent: ' + info.response);
+	  }
+	});
+	res.redirect('/')
+})
    
 router.post('/remove',function(req,res){
 	var id=req.body.no;
@@ -55,7 +124,8 @@ router.post('/update',function(req,res){
 });
 
 
-router.post('/submit',function(req,res){
+router.post('/submit', upload.single('image'),function(req,res){
+	console.log(req.file);
 	var firstname=req.body.name;
 	console.log(firstname); 
 
@@ -67,8 +137,10 @@ router.post('/submit',function(req,res){
 
 	var email=req.body.email;
 	console.log(email);
+	var image=req.file.originalname;
+	console.log(image);
 
-	collection1.insert({"firstname":req.body.name,"lastname":req.body.name2,"number":req.body.number,"email":req.body.email,});
+	collection1.insert({"firstname":req.body.name,"lastname":req.body.name2,"number":req.body.number,"email":req.body.email,"image":req.file.originalname});
 
 res.redirect("/home");
 	 });
@@ -137,10 +209,13 @@ router.post('/signup', function(req, res) {
   		res.render('index',{err:"invalid username(or)password"});
   	}
   	else if(docs){
+  		    delete docs.password;
+  		    req.session.user=docs;
   			console.log("success");
   			res.redirect('/home');
   		}
   		else{
+  			
   			console.log("error");
   		}
   	});

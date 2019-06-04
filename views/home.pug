@@ -26,11 +26,15 @@ html
           li
             button.btn.btn-info
               a(data-toggle='tab', href='#list') List
+          li
+            button.btn.btn-info
+              a(href='/logout') Logout
     .container
       .tab-content
         #form.tab-pane.fade
+          b #{user.name}
           .container
-            form(action='/submit', method='post')
+            form(action='/submit', method='post' enctype="multipart/form-data")
               .row
                 h3 DETAILS
                 hr(style='border-color: red;')
@@ -41,6 +45,14 @@ html
                     span.input-group-addon(style='border-radius: 19px;')
                       i.fa.fa-user(arial-hidden='true')
                     input.form-control(type='text', name='name', placeholder='enter your name', style='border-radius: 20px; font-size:15px;')
+              .row
+                .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
+                  label.control-label.col-md-20
+                  b Image:
+                  .input-group
+                    span.input-group-addon(style='border-radius: 19px;')
+                      i.fa.fa-picture-o(arial-hidden='true')
+                    input.form-control(type='file', name='image' style='border-radius: 20px; font-size:15px;')
               .row
                 .form-group.col-md-4(style='margin-left: 90px; margin-top: 21px;')
                   label.control-label.col-md-5
@@ -72,6 +84,7 @@ html
           table#example.table-bordered.table-striped.table-hover
             thead
               tr
+                th profile
                 th firstname
                 th lastname
                 th number
@@ -80,6 +93,8 @@ html
             tbody
               each member in data
                 tr
+                  td 
+                    img(src="images/"+member.image,height="50",width="50")
                   td #{member.firstname}
                   td #{member.lastname}
                   td #{member.number}
